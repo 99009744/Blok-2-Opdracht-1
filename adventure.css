@@ -1,4 +1,75 @@
-.main{
+#page{
+    position: relative;
+}
+#main{
     width: 1000px;
-    margin: 0 auto;
+    height: 250px;
+    margin-bottom: 50px;
+    border: black 3px solid;
+    border-radius: 10px;
+    box-shadow:  0 0 10px 2px;
+    position: absolute;
+    top: 700px;
+    left: 460px;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    background-color: grey;
+
+}
+#stats{
+    width: 120px;
+    height: 200px;
+    border: black 3px solid;
+    border-radius: 10px;
+    box-shadow:  0 0 10px 2px;
+    background-color: grey;
+    font-size: 12px;
+    margin-left: 0px;
+    opacity: 0.6;
+    position: absolute;
+    top: 50px;
+    right: 12px;
+    display: inline-block;
+    font-family: 'Gochi Hand', cursive;
+}
+
+p{
+    font-family: 'Gochi Hand', cursive;
+    margin: 5px auto;
+    width: 900px;
+    height: 200px;
+    font-size: 32px;
+    padding: 10px;
+    display: block;
+}
+
+#firstOption{
+    position: absolute;
+    bottom: 5px;
+    left: 300px;
+    color: white;
+    background-color: black;
+}
+
+#secondOption{
+    position: absolute;
+    bottom: 5px;
+    left: 450px;
+    color: white;
+    background-color: black;
+}
+
+#thirdOption{
+    position: absolute;
+    bottom: 5px;
+    left: 600px;
+    color: white;
+    background-color: black;
+}
+#nextButton{
+    position: absolute;
+    bottom: 40px;
+    right: 35px;
+    color: white;
+    background-color: black;
 }
