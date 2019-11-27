@@ -24,7 +24,7 @@
     box-shadow:  0 0 10px 2px;
     background-color: grey;
     font-size: 12px;
-    margin-left: 0px;
+    padding: 5px;
     opacity: 0.6;
     position: absolute;
     top: 50px;
@@ -49,6 +49,7 @@ p{
     left: 300px;
     color: white;
     background-color: black;
+    visibility: hidden;
 }
 
 #secondOption{
@@ -57,6 +58,7 @@ p{
     left: 450px;
     color: white;
     background-color: black;
+    visibility: hidden;
 }
 
 #thirdOption{
@@ -65,6 +67,22 @@ p{
     left: 600px;
     color: white;
     background-color: black;
+    visibility: hidden;
+}
+input{
+    position: absolute;
+    bottom: 100px;
+    right: 500px;
+    width: 100px;
+}
+#nameInpput{
+    visibility: hidden;
+}
+#nameButton{
+    position: absolute;
+    bottom: 100px;
+    right: 500px;
+    visibility: hidden;
 }
 #nextButton{
     position: absolute;
@@ -72,4 +90,25 @@ p{
     right: 35px;
     color: white;
     background-color: black;
+    visibility: visible;
+}
+
+#nextButton2{
+    position: absolute;
+    bottom: 40px;
+    right: 35px;
+    color: white;
+    background-color: black;
+    visibility: hidden;
+}
+#gp{
+    position: absolute;
+    top: 25px;
+    left: 750px;
+}
+#graves{
+    position: absolute;
+    top: 25px;
+    left: 565px;
+    height: 650px;
 }
