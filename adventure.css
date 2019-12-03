@@ -32,6 +32,48 @@
     display: inline-block;
     font-family: 'Gochi Hand', cursive;
 }
+#bag{
+    position: relative;
+    height: 100px;
+    width: 120px;
+}
+#invertory{
+    width: 120px;
+    height: 130px;
+    border: black 3px solid;
+    border-radius: 10px;
+    box-shadow:  0 0 10px 2px;
+    background-color: grey;
+    font-size: 12px;
+    padding: 0px;
+    text-align: center;
+    line-height: 0px;
+    opacity: 0.6;
+    position: absolute;
+    top: 300px;
+    right: 12px;
+    display: inline-block;
+    font-family: 'Gochi Hand', cursive;
+}
+
+#fullinvertory{
+    width: 500px;
+    height: 500px;
+    border: black 3px solid;
+    border-radius: 10px;
+    box-shadow:  0 0 10px 2px;
+    background-color: grey;
+    font-size: 12px;
+    padding: 0px;
+    text-align: center;
+    line-height: 0px;
+    opacity: 0.6;
+    position: absolute;
+    top: 290px;
+    right: 710px;
+    display: inline-block;
+    font-family: 'Gochi Hand', cursive;
+}
 
 p{
     font-family: 'Gochi Hand', cursive;
@@ -108,12 +150,19 @@ input{
 #twistedFate{
     position: absolute;
     top: 25px;
-    left: 700px;
+    left: 450px;
     height: 650px;
 }
 #tahmKench{
     position: absolute;
     top: 25px;
-    left: 565px;
     height: 650px;
+    left: 265px;
+}
+#golem{
+    position: absolute;
+    top: 25px;
+    right: 160px;
+    height: 650px;
+    width: 660px;
 }
