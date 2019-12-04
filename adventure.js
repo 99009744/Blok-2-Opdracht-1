@@ -7,6 +7,9 @@ var ad = 0;
 var md = 0;
 var armor = 0;
 var damage;
+var bonusad;
+var bonusmd;
+var bonusarmor;
 
 function statsBar(){
     var stats = document.createElement("div");
@@ -79,29 +82,26 @@ function healthFunction(damage){
     document.getElementById("stats").appendChild(healthbar);
     defeated()
 }
-function ranger(){
-    ad =+ 30;
+function ranger(bonusad){
+    ad = ad + bonusad;
     attackDamagebar = document.createElement("h1");
     document.getElementById("ad").innerHTML = "AD:" + ad;
     attackDamagebar.id = "ad"
     document.getElementById("stats").appendChild(attackDamagebar);
-    part2();
 }
-function mage(){
-    md=+30;
+function mage(bonusmd){
+    md= md + bonusmd;
     magicDamagebar = document.createElement("h1");
     document.getElementById("md").innerHTML = "MD:" + md;
     magicDamagebar.id = "md"
     document.getElementById("stats").appendChild(magicDamagebar);
-    part2();
 }
-function tank(){
-    armor=+30;
+function tank(bonusarmor){
+    armor= armor+bonusarmor
     armorbar = document.createElement("h1");
     document.getElementById("armor").innerHTML = "Armor:" + armor;
     armorbar.id = "armor"
     document.getElementById("stats").appendChild(armorbar);
-    part2();
 }
 
 var fullpage = document.createElement("div")
@@ -194,21 +194,21 @@ var firstOption = document.createElement("button");
 firstOption.innerHTML = "CHOICE 1";
 firstOption.id = "firstOption";
 document.getElementById("main").appendChild(firstOption);
-firstOption.onclick=function(){ranger()};
+firstOption.onclick=function(){ranger(30), part2()};
 firstOption.style.display = "none";
 
 var secondOption = document.createElement("button");
 secondOption.innerHTML = "CHOICE 2";
 secondOption.id = "secondOption";
 document.getElementById("main").appendChild(secondOption);
-secondOption.onclick=function(){mage()};
+secondOption.onclick=function(){mage(30), part2()};
 secondOption.style.display = "none";
 
 var thirdOption = document.createElement("button");
 thirdOption.innerHTML = "CHOICE 3";
 thirdOption.id = "thirdOption";
 document.getElementById("main").appendChild(thirdOption);
-thirdOption.onclick=function(){tank()};
+thirdOption.onclick=function(){tank(30), part2()};
 thirdOption.style.display = "none";
 
 var gangplank = document.createElement("img");
@@ -329,6 +329,7 @@ function gravesChallange(){
     else if (nextTextPart3 == 11 && ad>=30) {
         story.innerHTML = "A long sword is an item that boost your AD with +10<br>Items that you collect in the story can be upgraded to better items in your invertory.";
         document.getElementById("nextButton").onclick=function(){part3()};
+        ranger(10)
         nextTextPart2 = 0;
     }
 }
@@ -404,6 +405,7 @@ function tahmKenchChallange(){
         story.innerHTML = "A relic is an item that boost your armor with +10<br>Items that you collect in the story can be upgraded to better items in your invertory.";
         document.getElementById("nextButton").onclick=function(){part3()};
         nextTextPart2 = 0;
+        tank(10)
     }
 }
 var twistedFate = document.createElement("img");
@@ -470,12 +472,13 @@ function twistedFateChallange(){
         story.innerHTML = "Twisted Fate: Thanks alot for your help!";
     }
     if (nextTextPart3 == 11 && md>=30){
-        story.innerHTML = "Twisted Fate: As a reward i wll give you a spell book.";
+        story.innerHTML = "Twisted Fate: As a reward i wll give you a spell book";
     }
     if (nextTextPart3 == 12 && md>=30){
         story.innerHTML = "A spell book is an item that boost your MD with +10<br>Items that you collect in the story can be upgraded to better items in your invertory.";
         document.getElementById("nextButton").onclick=function(){part3()};
         nextTextPart2 = 0;
+        mage(10)
     }
 }
 
@@ -749,7 +752,7 @@ function garentraining(){
     secondOption.style.display = "none";
     thirdOption.style.display = "none";
     document.getElementById("firstOption").onclick=function(){tankTraining()};
-    document.getElementById("secondOption").onclick=function(){magicTraining()};
+    document.getElementById("secondOption").onclick=function(){mageTraining()};
     document.getElementById("thirdOption").onclick=function(){accurasyTraining()};
     document.getElementById("nextButton").onclick=function(){garentraining()};
     if (nextTextPart3 == 1){
@@ -774,20 +777,21 @@ function garentraining(){
     }
     if (nextTextPart3 == 7){
         story.innerHTML = "Garen: We got Vayne, she is a ranger and can help you to get better accuracy.";
-    }
-    if (nextTextPart3 == 8){
-        story.innerHTML = "Garen: With who do you want to train?<br>Choise 1: Jarven IV the tank trainer.<br>Choise 2: Lux the magic trainer.<br>Choise 3: Vayne the accuracy trainer.";
-        firstOption.style.display = "inline-block";
-        secondOption.style.display = "inline-block";
-        thirdOption.style.display = "inline-block";
-        nextButton.style.direction = "none";    
+        document.getElementById("nextButton").onclick=function(){garenoptions()};
     }
 }
-var jarven = document.createElement("img");
-    jarvan.src = "characters/jarven.png";
-    jarven.id = "jarven";
-    jarven.style.display = "none";
-    document.getElementById("page").appendChild(jarven);
+function garenoptions(){
+    story.innerHTML = "Garen: With who do you want to train?<br>Choise 1: Jarven IV the tank trainer.<br>Choise 2: Lux the magic trainer.<br>Choise 3: Vayne the accuracy trainer.";
+    firstOption.style.display = "inline-block";
+    secondOption.style.display = "inline-block";
+    thirdOption.style.display = "inline-block";
+    nextButton.style.display = "none";
+}
+var jarvan = document.createElement("img");
+    jarvan.src = "characters/jarvaniv.png";
+    jarvan.id = "jarvan";
+    jarvan.style.display = "none";
+    document.getElementById("page").appendChild(jarvan);
 
 var lux = document.createElement("img");
     lux.src = "characters/lux.png";
@@ -801,12 +805,161 @@ var vayne = document.createElement("img");
     vayne.style.display = "none";
     document.getElementById("page").appendChild(vayne);
 
-function jarveniv(){
+function tankTraining(){
     nextTextPart1++;
+    nextTextPart3 = 0;
+    firstOption.style.display = "none";
+    secondOption.style.display = "none";
+    thirdOption.style.display = "none";
+    nextButton.style.display = "inline-block";
+    garen.style.display = "none";
+    document.getElementById("nextButton").onclick=function(){tankTraining()};
     if (nextTextPart1 == 1){
-
+        jarvan.style.display = "inline-block";
+        story.innerHTML = "Jarvan IV: Hello my name is Jarven IV, i'm here to help you train your deffence.";
+    }
+    if (nextTextPart1 == 2){
+        story.innerHTML = "Jarvan IV: The training will take 1 week to compleet if you can handle it.";
+    }
+    if (nextTextPart1 == 3){
+        story.innerHTML = "Jarvan IV: Alright let get right to it!";
+    }
+    if (nextTextPart1 == 4 && armor>=40){
+        story.innerHTML = "1 week later.";
+    }
+    if (nextTextPart1 == 5 && armor>=40){
+        story.innerHTML = "Jarvan IV: Well done "+ name +"! You completed the training and your armor is boosted by +20";
+        tank(20)
+    }
+    if (nextTextPart1 == 6 && armor>=40){
+        story.innerHTML = "Jarvan IV: As a reward i will give you a relic, this gives you a bonus of +10 armor.";
+        tank(10)
+        document.getElementById("nextButton").onclick=function(){garencompleet()}
+    }
+    if (nextTextPart1 == 7 && armor>=40){
+        story.innerHTML = "Jarvan IV: Now its time to return to Garen.";
+    }
+    else if (nextTextPart1 == 4 && armor<40){
+        story.innerHTML = "The next day";
+    }
+    else if(nextTextPart1 == 5 && armor<40){
+        story.innerHTML = "Jarvan IV: "+ name +" i don't think deffence is your specialty.. you should try something else";
+        healthFunction(25);
+        document.getElementById("nextButton").onclick=function(){garenoptions()};
     }
 }
-function test(){
-    alert("TEST");
+
+function mageTraining(){
+    nextTextPart1++;
+    nextTextPart3 = 0;
+    firstOption.style.display = "none";
+    secondOption.style.display = "none";
+    thirdOption.style.display = "none";
+    nextButton.style.display = "inline-block";
+    garen.style.display = "none";
+    document.getElementById("nextButton").onclick=function(){mageTraining()};
+    if (nextTextPart1 == 1){
+        lux.style.display = "inline-block";
+        story.innerHTML = "Lux: Hello my name is Lux, i'm here to help you train your magic.";
+    }
+    if (nextTextPart1 == 2){
+        story.innerHTML = "Lux: The training will take 1 week to compleet if you can handle it.";
+    }
+    if (nextTextPart1 == 3){
+        story.innerHTML = "Lux: Alright let get right to it!";
+    }
+    if (nextTextPart1 == 4 && md>=40){
+        story.innerHTML = "1 week later.";
+    }
+    if (nextTextPart1 == 5 && md>=40){
+        story.innerHTML = "Lux: Well done "+ name +"! You completed the training and your MD is boosted by +20";
+        mage(20)
+    }
+    if (nextTextPart1 == 6 && md>=40){
+        story.innerHTML = "Lux: As a reward i will give you a spellbook, this gives you a bonus of +10 MD.";
+        mage(10)
+        document.getElementById("nextButton").onclick=function(){garencompleet()}
+    }
+    else if (nextTextPart1 == 4 && md<40){
+        story.innerHTML = "The next day";
+    }
+    else if(nextTextPart1 == 5 && md<40){
+        story.innerHTML = "Lux: "+ name +" i don't think magic is your specialty.. you should try something else";
+        healthFunction(25);
+        document.getElementById("nextButton").onclick=function(){garenoptions()};
+    }
+}
+function accurasyTraining(){
+    nextTextPart1++;
+    nextTextPart3 =0;
+    firstOption.style.display = "none";
+    secondOption.style.display = "none";
+    thirdOption.style.display = "none";
+    nextButton.style.display = "inline-block";
+    garen.style.display = "none";
+    document.getElementById("nextButton").onclick=function(){accurasyTraining()};
+    if (nextTextPart1 == 1){
+        story.innerHTML = "Vayne: Hello my name is Vayne, i'm here to help you train your accurasy.";
+        vayne.style.display = "inline-block";
+    }
+    if (nextTextPart1 == 2){
+        story.innerHTML = "Vayne: The training will take 1 week to compleet if you can handle it.";
+    }
+    if (nextTextPart1 == 3){
+        story.innerHTML = "Vayne: Alright let get right to it!";
+    }
+    if (nextTextPart1 == 4 && ad>=40){
+        story.innerHTML = "1 week later.";
+    }
+    if (nextTextPart1 == 5 && ad>=40){
+        story.innerHTML = "Vayne: Well done "+ name +"! You completed the training and your AD is boosted by +20";
+        ranger(20)
+    }
+    if (nextTextPart1 == 6 && ad>=40){
+        story.innerHTML = "Vayne: As a reward i will give you a long sword, this gives you a bonus of +10 AD.";
+        ranger(10)
+        document.getElementById("nextButton").onclick=function(){garencompleet()}
+    }
+    else if (nextTextPart1 == 4 && ad<40){
+        story.innerHTML = "The next day";
+    }
+    else if(nextTextPart1 == 5 && ad<40){
+        story.innerHTML = "Vayne: "+ name +" i don't think range is your specialty.. you should try something else";
+        healthFunction(25);
+        document.getElementById("nextButton").onclick=function(){garenoptions()};
+    }
+}
+
+function garencompleet(){
+    nextTextPart3++;
+    nextTextPart1 = 0;
+    firstOption.style.display = "none";
+    secondOption.style.display = "none";
+    thirdOption.style.display = "none";
+    lux.style.display = "none";
+    vayne.style.display = "none";
+    jarvan.style.display = "none";
+    document.getElementById("firstOption").onclick=function(){tankTraining()};
+    document.getElementById("secondOption").onclick=function(){magicTraining()};
+    document.getElementById("nextButton").onclick=function(){garentraining()};
+    if (nextTextPart3 == 1){
+        story.innerHTML = "Garen: Welcome back, congratulations on the succes in your training";
+        document.body.style.backgroundImage = "url(background/demacia2.png)"
+        garen.style.display = "inline-block";
+    }
+    if (nextTextPart3 == 2){
+        story.innerHTML = "Garen: 2 of our hero's need help with something and i want you to help 1 of them.";
+    }
+    if (nextTextPart3 == 3){
+        story.innerHTML = "Garen: Lucian is on a mission to get his wife back and in the Shadow Isles.";
+    }
+    if (nextTextPart3 == 4){
+        story.innerHTML = "Garen: Fiora is on a mission in Noxus to get her sword back.";
+    }
+    if (nextTextPart3 == 5){
+        story.innerHTML = "Garen: So who do you want to help?<br>Choice 1: Lucian.<br>Choice 2: Fiora.";
+        firstOption.style.display = "inline-block";
+        secondOption.style.display = "inline-block";
+        nextButton.style.display = "none";
+    }
 }
