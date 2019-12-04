@@ -41,7 +41,7 @@ function invertory(){
     invertory.id = "invertory";
     document.getElementById("page").appendChild(invertory);
     invertorytext = document.createElement("h1");
-    invertorytext.innerHTML = "Invertory";
+    invertorytext.innerHTML = "Inventory";
     invertorytext.id = "invertorytext";
     document.getElementById("invertory").appendChild(invertorytext);
     bag = document.createElement("img");
@@ -66,12 +66,18 @@ function invertorySpace(){
     }
 }
 
+function defeated(){
+    if (health<=0){
+        defeat.style.display = "inline-block";
+    }
+}
 function healthFunction(damage){
     health= health - damage;
     healthbar = document.createElement("h1");
     document.getElementById("hp").innerHTML = "HP:" + health;
     attackDamagebar.id = "hp"
     document.getElementById("stats").appendChild(healthbar);
+    defeated()
 }
 function ranger(){
     ad =+ 30;
@@ -136,6 +142,12 @@ nameButton.style.display = "none";
 document.getElementById("main").appendChild(nameButton);
 nameButton.onclick=function(){nameGenerator(), part1()};
 
+var defeat = document.createElement("img");
+defeat.src = "characters/defeat.png";
+defeat.id = "defeat";
+defeat.style.display = "none";
+document.getElementById("page").appendChild(defeat);
+
 function nameGenerator(){
     name = document.getElementById("text1").value;
     nextButton.style.display = "inline-block";
@@ -143,9 +155,14 @@ function nameGenerator(){
 
 invertory()
 statsBar()
-
+start()
+function start(){
+    story.innerHTML= "Welcome to the game made by MaestroMitchell productions.<br>Its a league of legends based game where you play as a class and need to compleet challanges that are good for your class.<br>Goodluck!";
+    nextButton.innerHTML = "START";
+}
 function part1(){
     nextTextPart1 ++
+    nextButton.innerHTML = "NEXT";
     if (nextTextPart1 == 1){
         story.innerHTML = "You hear someone walking above you... the footsteps are going down a stair.";
     }
@@ -164,7 +181,7 @@ function part1(){
         nameInput.style.visibility = "hidden";
     }
     else if (nextTextPart1 ==5){
-        story.innerHTML = "Choice 1, A ranger you will get +30 ad.<br>Choice 2, A mage you will get +30 ap.<br>Choice 3, A tank you will get +30 armor.";
+        story.innerHTML = "Choice 1, A ranger you will get +30 AD.<br>Choice 2, A mage you will get +30 MD.<br>Choice 3, A tank you will get +30 Armor.<br>Good to know is the class you pick have impacts on the challanges you can do!";
         document.getElementById("firstOption").style.display = "inline-block";
         document.getElementById("secondOption").style.display = "inline-block";
         document.getElementById("thirdOption").style.display = "inline-block";
@@ -292,11 +309,13 @@ function gravesChallange(){
     }
     else if (nextTextPart3 == 9 && ad<30) {
         story.innerHTML = "You pass out with no memories of what happend and return to gangplank..<br> To compleet this challange you wil need to have 30AD<br> You might want to try a different challange.<br>You lost 15hp";
-        healthFunction(15);
+        healthFunction(25);
         graves.style.display = "none";
     }
     else if(nextTextPart3 == 10 && ad<30){
         document.getElementById("nextButton").onclick=function(){gpOptions()};
+        document.body.style.backgroundImage = "url(background/back.png)";
+        graves.style.display = "none";
     }
     else if (nextTextPart3 == 8 && ad>=30){
     story.innerHTML = "You hit them al and broke the bottles.";
@@ -359,12 +378,15 @@ function tahmKenchChallange(){
     }
     if (nextTextPart3 == 8 && armor <30){
         story.innerHTML = "You pass out with no memories of what happend and return to gangplank..<br> To compleet this challange you wil need to have 30Armor<br> You might want to try a different challange.<br>You lost 15hp";
-        healthFunction(15);
+        healthFunction(25);
         tahmKench.style.display = "none";
         golem.style.display = "none"; 
     }
     if (nextTextPart3 == 9 && armor<30){
         document.getElementById("nextButton").onclick=function(){gpOptions()};
+        tahmKench.style.display = "none";
+        golem.style.display = "none";
+        document.body.style.backgroundImage = "url(background/back.png)";
     }
     if (nextTextPart3 == 7 && armor>=30){
         story.innerHTML = "Your doing a great job keeping the golem busy en you guys defeated it";
@@ -428,12 +450,15 @@ function twistedFateChallange(){
     }
     if (nextTextPart3 == 9 && md<30){
         story.innerHTML = "You pass out with no memories of what happend and return to gangplank..<br> To compleet this challange you wil need to have 30MD<br> You might want to try a different challange.<br>You lost 15hp";
-        healthFunction(15);
+        healthFunction(25);
         twistedFate.style.display = "none";
         golem.style.display = "none";
     }
     if (nextTextPart3 == 10 && md<30){
         document.getElementById("nextButton").onclick=function(){gpOptions()};
+        document.body.style.backgroundImage = "url(background/back.png)";
+        twistedFate.style.display = "none";
+        golem.style.display = "none";
     }
     if (nextTextPart3 == 8 && md>=30){
         story.innerHTML = "You're doing a spell at it a critical hit on the golem and it fainted.";
@@ -456,9 +481,14 @@ function twistedFateChallange(){
 
 function part3(){
     nextTextPart2 ++
+    nextTextPart1 = 0;
+    nextTextPart3 = 0;
     firstOption.style.display = "none";
     secondOption.style.display = "none";
     thirdOption.style.display = "none";
+    document.getElementById("firstOption").onclick=function(){noxus()};
+    document.getElementById("secondOption").onclick=function(){shadowIsles()};
+    document.getElementById("thirdOption").onclick=function(){demacia()};
     nextButton.style.display = "inline-block";
     document.body.style.backgroundImage = "url(background/bilgewater.jpg)";
     document.getElementById("nextButton").onclick=function(){part3()};
@@ -474,7 +504,309 @@ function part3(){
     if (nextTextPart2 == 2){
         story.innerHTML = "Gangplank: Congratulations on completing the challange.";
     }
-    if (nextTextPart3 == 3){
-        story.innerHTML = "Gangplank: Alright, you payed of";
+    if (nextTextPart2 == 3){
+        story.innerHTML = "Gangplank: Alright, you're free to go where ever you want to go to.";
     }
+    if (nextTextPart2 == 4){
+        story.innerHTML = "Gangplank: We have 3 ships leaving today to 3 different locations.";
+    }
+    if (nextTextPart2 ==5){
+        story.innerHTML = "Gangplank: 1 is going to Noxus, this is an notirious city with a lot of bandits en strong warrios that are dueling.<br>not the most friendly city to go to.";
+    }
+    if (nextTextPart2 == 6){
+        story.innerHTML = "Gangplank: 2 is going to the Shadow Isles, this is an misty and dark location thats almost only forrest.<br>Not the savest location to go to.";
+    }
+    if (nextTextPart2 == 7){
+        story.innerHTML = "Gangplank: 3 is going to Demacia, this i the city of justice, a big city where everone is welcome.<br>The best options for people that want to train.";
+    }
+    if (nextTextPart2 == 8){
+        story.innerHTML = "Gangplank: So where do you want to go to?<br>Choice 1: Noxus<br>Choice 2: The Shadow Isles<br>Choice 3: Demacia."
+        document.getElementById("firstOption").style.display = "inline-block";
+        document.getElementById("secondOption").style.display = "inline-block";
+        document.getElementById("thirdOption").style.display = "inline-block";
+        nextButton.style.display = "none";
+    }
+}
+var galio = document.createElement("img");
+    galio.src = "characters/galio.png";
+    galio.id = "galio";
+    galio.style.display = "none";
+    document.getElementById("page").appendChild(galio);
+
+var garen = document.createElement("img");
+    garen.src = "characters/garen.png";
+    garen.id = "garen";
+    garen.style.display = "none";
+    document.getElementById("page").appendChild(garen);
+
+function demacia(){
+    nextTextPart1 ++
+    nextTextPart2 = 0;
+    nextTextPart3 = 0;
+    firstOption.style.display = "none";
+    secondOption.style.display = "none";
+    thirdOption.style.display = "none";
+    nextButton.style.display = "inline-block";
+    document.getElementById("nextButton").onclick=function(){demacia()};
+    gangplank.style.display = "none";
+    if (nextTextPart1 == 1) {
+        story.innerHTML = "Gangplank: Alright! Good luck on your journey to Demacia!";
+        gangplank.style.display = "inline-block";
+        document.body.style.backgroundImage = "url(background/bilgewater.jpg)";
+    }
+    if (nextTextPart1 == 2){
+        story.innerHTML = "You're on your way to Damacia.";
+        gangplank.style.display = "none";
+        document.body.style.backgroundImage = "url(background/boat2.jpg)";
+    }
+    if (nextTextPart1 == 3){
+        story.innerHTML = "3 houres later...";
+    }
+    if (nextTextPart1 == 4){
+        document.body.style.backgroundImage = "url(background/demacia.jpg)"
+        story.innerHTML = name+": Wow, its so huge, i have no idea where to go to.";
+    }
+    if (nextTextPart1 == 5){
+        story.innerHTML = "You feel save around here and go on a walk to explore the city.";
+    }
+    if (nextTextPart1 == 6){
+        story.innerHTML = "You see something standing and have no clue what it is?  even tho it doesnt look human, it look heroic and friendly.<br>You're going to it and see if you can ask some questions about Demacia.";
+    }
+    if (nextTextPart1 == 7){
+        galio.style.display = "inline-block";
+        story.innerHTML = "Galio: Hello, my name is Galio!";
+    }
+    if (nextTextPart1 ==8){
+        story.innerHTML = "You're telling Galio that you got here with a boat from Gangplank, and you're here to train.";
+    }
+    if (nextTextPart1 == 9){
+        story.innerHTML = "Galio: Alright welcome! i will bring you to Garen he is the leader around here and will help you to get you to the right person for your training";
+    }
+    if (nextTextPart1 == 10){
+        document.getElementById("nextButton").onclick=function(){garentraining()};
+        galio.style.display = "none";
+    }
+}
+var darius = document.createElement("img");
+    darius.src = "characters/darius.png";
+    darius.id = "darius";
+    darius.style.display = "none";
+    document.getElementById("page").appendChild(darius);
+
+var fiora = document.createElement("img");
+    fiora.src = "characters/fiora.png";
+    fiora.id = "fiora";
+    fiora.style.display = "none";
+    document.getElementById("page").appendChild(fiora);
+
+function noxus(){
+    nextTextPart1++;
+    firstOption.style.display = "none";
+    secondOption.style.display = "none";
+    thirdOption.style.display = "none";
+    nextButton.style.display = "inline-block";
+    document.getElementById("nextButton").onclick=function(){noxus()};
+    gangplank.style.display = "none";
+    if (nextTextPart1 == 1) {
+        story.innerHTML = "Gangplank: Alright! Good luck on your journey to Noxus!";
+        gangplank.style.display = "inline-block";
+        document.body.style.backgroundImage = "url(background/bilgewater.jpg)";
+    }
+    if (nextTextPart1 == 2){
+        story.innerHTML = "You're on your way to Noxus.";
+        gangplank.style.display = "none";
+        document.body.style.backgroundImage = "url(background/boat2.jpg)";
+    }
+    if (nextTextPart1 == 3){
+        story.innerHTML = "3 houres later...";
+    }
+    if (nextTextPart1 == 4){
+        story.innerHTML = name + ": Wow so this is Noxus, i feel a bloodlust atmosphere around here.";
+        document.body.style.backgroundImage = "url(background/noxus.png)";
+    }
+    if (nextTextPart1 == 5){
+        story.innerHTML = "You think its an good idea to look around a bit more and see if you can get some help"
+    }
+    if (nextTextPart1 == 6){
+        story.innerHTML = "When you walk around a corner you bump into someone..";
+    }
+    if (nextTextPart1 == 7){
+        darius.style.display = "inline-block";
+        story.innerHTML = "???: WHAT DO YOU THINK YOUR DOING";
+    }
+    if (nextTextPart1 == 8){
+        story.innerHTML = "???: LOOK WHERE YOU ARE WALKING KID";
+    }
+    if (nextTextPart1 == 9){
+        story.innerHTML = "??? hits you and walks off";
+        healthFunction(25);
+    }
+    if (nextTextPart1 == 10){
+        story.innerHTML = "Fiora: Are you alright?";
+        fiora.style.display = "inline-block";
+        darius.style.display = "none";
+    }
+    if (nextTextPart1 == 11){
+        story.innerHTML = "Fiora: Hello, my name is fiora, i saw what happend.";
+    }
+    if (nextTextPart1 == 12){
+        story.innerHTML = "Fiora: This is not a place for someone like you, let me bring you to Demacia.";
+    }
+    if (nextTextPart1 == 13){
+        story.innerHTML = "Fiora: I will bring you to garen, the leader of Demacia.<br>He can help you to get some training!";
+        document.getElementById("nextButton").onclick=function(){garentraining()};
+        fiora.style.display = "none";
+        document.body.style.backgroundImage = "url(background/back2.png)";
+    }
+}
+var maokai = document.createElement("img");
+    maokai.src = "characters/maokai.png";
+    maokai.id = "maokai";
+    maokai.style.display = "none";
+    document.getElementById("page").appendChild(maokai);
+
+var lucian = document.createElement("img");
+    lucian.src = "characters/lucian.png";
+    lucian.id = "lucian";
+    lucian.style.display = "none";
+    document.getElementById("page").appendChild(lucian);
+
+function shadowIsles(){
+    nextTextPart1 ++
+    nextTextPart2 = 0;
+    nextTextPart3 = 0;
+    firstOption.style.display = "none";
+    secondOption.style.display = "none";
+    thirdOption.style.display = "none";
+    nextButton.style.display = "inline-block";
+    document.getElementById("nextButton").onclick=function(){shadowIsles()};
+    if (nextTextPart1 == 1) {
+        story.innerHTML = "Gangplank: Alright! Good luck on your journey to the Shadow Isles!";
+        gangplank.style.display = "inline-block";
+        document.body.style.backgroundImage = "url(background/bilgewater.jpg)";
+    }
+    if (nextTextPart1 == 2){
+        story.innerHTML = "You're on your way to the Shadow Isles.";
+        gangplank.style.display = "none";
+        document.body.style.backgroundImage = "url(background/boat2.jpg)";
+    }
+    if (nextTextPart1 == 3){
+        story.innerHTML = "3 houres later...";
+    }
+    if (nextTextPart1 == 4){
+        story.innerHTML = name+": Wow.. so this is the Shadow Isles, its so dark and misty and dark around here.";
+        document.body.style.backgroundImage = "url(background/shadowisles.png)";
+    }
+    if (nextTextPart1 == 5){
+        story.innerHTML = "You think its an good idea to look around a bit more and see if you can get some help";
+    }
+    if (nextTextPart1 == 6){
+        story.innerHTML = "You see something that looks like a tree in the distance but it like was moving a litle.<br>You want to take a closer look of it.";
+    }
+    if (nextTextPart1 == 7){
+        story.innerHTML = "You're getting close to it..<br>And it moved again...";
+    }
+    if (nextTextPart1 == 8){
+        story.innerHTML = name + ": He.. hello? is someone there?";
+    }
+    if (nextTextPart1 == 9){
+        story.innerHTML = "???: What do you think you're doing in this forrest this is no place for a weak human like you!";
+        maokai.style.display = "inline-block";
+    }
+    if (nextTextPart1 == 10){
+        story.innerHTML = "??? swings at you but is really slow so you could dodge it.<br>You take a couple of step back but fell over a sticks.";
+        healthFunction(25);
+    }
+    if  (nextTextPart1 == 11){
+        story.innerHTML = "??? is comming to you again";
+    }
+    if (nextTextPart1 == 12) {
+        story.innerHTML = "There are flashing light comming hitting ??? in the back, its hurt and its taking off";
+        maokai.style.display = "none";
+    }
+    if (nextTextPart1 == 13){
+        story.innerHTML = "Someone is comming to you..."
+    }
+    if (nextTextPart1 == 14){
+        story.innerHTML = "Lucian: are you alright?";
+        lucian.style.display = "inline-block";
+    }
+    if (nextTextPart1 == 15){
+        story.innerHTML = "Lucian: my name is lucian, what are you doing here?";
+    }
+    if (nextTextPart1 == 16){
+        story.innerHTML = "Lucian: it's not save here come with me to Demacia.";
+        document.getElementById("nextButton").onclick=function(){garentraining()};
+        lucian.style.display = "none";
+        document.body.style.backgroundImage = "url(background/back2.png)";
+    }
+}
+
+function garentraining(){
+    nextTextPart3++;
+    nextTextPart1 = 0;
+    firstOption.style.display = "none";
+    secondOption.style.display = "none";
+    thirdOption.style.display = "none";
+    document.getElementById("firstOption").onclick=function(){tankTraining()};
+    document.getElementById("secondOption").onclick=function(){magicTraining()};
+    document.getElementById("thirdOption").onclick=function(){accurasyTraining()};
+    document.getElementById("nextButton").onclick=function(){garentraining()};
+    if (nextTextPart3 == 1){
+        story.innerHTML = "Garen: Hello, my name is Garen";
+        document.body.style.backgroundImage = "url(background/demacia2.png)"
+        garen.style.display = "inline-block";
+    }
+    if (nextTextPart3 == 2){
+        story.innerHTML = "Garen: Welcome in Demacia, the city of justice.<br>Everyone is welcome here!<br>As long as you have good intensions.";
+    }
+    if (nextTextPart3 == 3){
+        story.innerHTML = name + ": Hello my name is "+ name + ", and i'm here to get stronger!";
+    }
+    if (nextTextPart3 == 4){
+        story.innerHTML = "Garen: Alright "+ name + " i can help you with that we have trainers with different qualitys.";
+    }
+    if (nextTextPart3 == 5){
+        story.innerHTML = "Garen: We got Jarven IV, he is a tank and helps you to train getting your deffence up."
+    }
+    if (nextTextPart3 == 6){
+        story.innerHTML = "Garen: We got Lux, she is a mage and can help you to train your magic.";
+    }
+    if (nextTextPart3 == 7){
+        story.innerHTML = "Garen: We got Vayne, she is a ranger and can help you to get better accuracy.";
+    }
+    if (nextTextPart3 == 8){
+        story.innerHTML = "Garen: With who do you want to train?<br>Choise 1: Jarven IV the tank trainer.<br>Choise 2: Lux the magic trainer.<br>Choise 3: Vayne the accuracy trainer.";
+        firstOption.style.display = "inline-block";
+        secondOption.style.display = "inline-block";
+        thirdOption.style.display = "inline-block";
+        nextButton.style.direction = "none";    
+    }
+}
+var jarven = document.createElement("img");
+    jarvan.src = "characters/jarven.png";
+    jarven.id = "jarven";
+    jarven.style.display = "none";
+    document.getElementById("page").appendChild(jarven);
+
+var lux = document.createElement("img");
+    lux.src = "characters/lux.png";
+    lux.id = "lux";
+    lux.style.display = "none";
+    document.getElementById("page").appendChild(lux);
+
+var vayne = document.createElement("img");
+    vayne.src = "characters/vayne.png";
+    vayne.id = "vayne";
+    vayne.style.display = "none";
+    document.getElementById("page").appendChild(vayne);
+
+function jarveniv(){
+    nextTextPart1++;
+    if (nextTextPart1 == 1){
+
+    }
+}
+function test(){
+    alert("TEST");
 }
