@@ -72,13 +72,30 @@ function invertorySpace(){
 function defeated(){
     if (health<=0){
         defeat.style.display = "inline-block";
+        firstOption.style.display = "none";
+        secondOption.style.display = "none";
+        thirdOption.style.display = "none";
+        nextButton.style.display = "none";
+        graves.style.display = "none";
+        gangplank.style.display = "none";
+        garen.style.display = "none";
+        tahmKench.style.display = "none";
+        twistedFate.style.display = "none";
+        golem.style.display = "none";
+        darius.style.display = "none";
+        maokai.style.display = "none";
+        lux.style.display = "none";
+        vayne.style.display = "none";
+        jarvan.style.display = "none";
+        elise.style.display = "none";
+        yorick.style.display = "none";
     }
 }
 function healthFunction(damage){
     health= health - damage;
     healthbar = document.createElement("h1");
     document.getElementById("hp").innerHTML = "HP:" + health;
-    attackDamagebar.id = "hp"
+    healthbar.id = "hp"
     document.getElementById("stats").appendChild(healthbar);
     defeated()
 }
@@ -159,7 +176,7 @@ start()
 function start(){
     story.innerHTML= "Welcome to the game made by MaestroMitchell productions.<br>Its a league of legends based game where you play as a class and need to compleet challanges that are good for your class.<br>Goodluck!";
     nextButton.innerHTML = "START";
-}
+}   
 function part1(){
     nextTextPart1 ++
     nextButton.innerHTML = "NEXT";
@@ -781,11 +798,16 @@ function garentraining(){
     }
 }
 function garenoptions(){
+    nextTextPart1 = 0;
     story.innerHTML = "Garen: With who do you want to train?<br>Choise 1: Jarven IV the tank trainer.<br>Choise 2: Lux the magic trainer.<br>Choise 3: Vayne the accuracy trainer.";
     firstOption.style.display = "inline-block";
     secondOption.style.display = "inline-block";
     thirdOption.style.display = "inline-block";
     nextButton.style.display = "none";
+    vayne.style.display = "none";
+    jarvan.style.display = "none";
+    lux.style.display = "none";
+    garen.style.display = "inline-block";
 }
 var jarvan = document.createElement("img");
     jarvan.src = "characters/jarvaniv.png";
@@ -939,27 +961,233 @@ function garencompleet(){
     lux.style.display = "none";
     vayne.style.display = "none";
     jarvan.style.display = "none";
-    document.getElementById("firstOption").onclick=function(){tankTraining()};
-    document.getElementById("secondOption").onclick=function(){magicTraining()};
-    document.getElementById("nextButton").onclick=function(){garentraining()};
+    document.getElementById("nextButton").onclick=function(){garencompleet()};
     if (nextTextPart3 == 1){
         story.innerHTML = "Garen: Welcome back, congratulations on the succes in your training";
         document.body.style.backgroundImage = "url(background/demacia2.png)"
         garen.style.display = "inline-block";
     }
     if (nextTextPart3 == 2){
-        story.innerHTML = "Garen: 2 of our hero's need help with something and i want you to help 1 of them.";
+        story.innerHTML = "Garen: 1 of our hero's need help with something and i want you to him.";
     }
     if (nextTextPart3 == 3){
         story.innerHTML = "Garen: Lucian is on a mission to get his wife back and in the Shadow Isles.";
     }
     if (nextTextPart3 == 4){
-        story.innerHTML = "Garen: Fiora is on a mission in Noxus to get her sword back.";
+        story.innerHTML = "Garen: And he really could use your help.";
     }
     if (nextTextPart3 == 5){
-        story.innerHTML = "Garen: So who do you want to help?<br>Choice 1: Lucian.<br>Choice 2: Fiora.";
-        firstOption.style.display = "inline-block";
-        secondOption.style.display = "inline-block";
-        nextButton.style.display = "none";
+        story.innerHTML = "Garen: We have a boat leaving to the shadow isles soon.";
+        document.getElementById("nextButton").onclick=function(){lucianmission()};
+    }
+}
+
+function lucianmission(){
+    nextTextPart1++
+    nextTextPart3 = 0;
+    nextTextPart2 = 0;
+    document.getElementById("nextButton").onclick=function(){lucianmission()};
+    firstOption.style.display = "none";
+    secondOption.style.display = "none";
+    thirdOption.style.display = "none";
+    nextButton.style.display = "inline-block";
+    if (nextTextPart1 == 1){
+        document.body.style.backgroundImage = "url(background/demacia2.png)"
+        garen.style.display = "inline-block";
+        story.innerHTML = "Garen: Alright good luck on your mission!";
+    }
+    if (nextTextPart1 == 2){
+        story.innerHTML = "You're on your way to the Shadow Isles.";
+        document.body.style.backgroundImage = "url(background/boat3.jpg)";
+        garen.style.display = "none";
+    }
+    if (nextTextPart1 == 3){
+        story.innerHTML = "4 houres later...";
+    }
+    if (nextTextPart1 == 4){
+        story.innerHTML = "Lucian: Hello, thanks for helping me out with my mission.";
+        document.body.style.backgroundImage = "url(background/shadowisles.png)"
+        lucian.style.display = "inline-block";
+    }
+    if (nextTextPart1 == 5){
+        story.innerHTML = "Lucian: Well you're probably wondering how i got to this mission..";
+    }
+    if (nextTextPart1 == 6){
+        story.innerHTML = "Lucian: About a year ago thresh captured my wife when we had a mission to do in the shadow isles.";
+    }
+    if (nextTextPart1 == 7){
+        story.innerHTML = "Lucian: Thresh has this lanturn with him that he can use to trap people in it...";
+    }
+    if (nextTextPart1 == 8){
+        story.innerHTML = "Lucian: So lets find him and get my wife back!";
+    }
+    if (nextTextPart1 == 9){
+        story.innerHTML = "You are walking in the forrest on the road, but the road splits in to 2 ways.";
+    }
+    if (nextTextPart1 == 10){
+        story.innerHTML = "You can go left, right or keep going straight off road.";
+        document.getElementById("nextButton").onclick=function(){shadowIslesChoices()};
+    }
+    
+}
+function shadowIslesChoices(){
+    story.innerHTML = "Choice 1: Go left.<br>Choice 2: Go middle.<br>Choice 3: Go right.";
+    nextButton.style.display = "none";
+    document.getElementById("firstOption").style.display = "inline-block";
+    document.getElementById("secondOption").style.display = "inline-block";
+    document.getElementById("thirdOption").style.display = "inline-block";
+    document.getElementById("firstOption").onclick=function(){left()};
+    document.getElementById("secondOption").onclick=function(){middle()};
+    document.getElementById("thirdOption").onclick=function(){right()};
+    document.body.style.backgroundImage = "url(background/shadowisles.png)"
+    lucian.style.display = "inline-block";
+    yorick.style.display = "none";
+    elise.style.display = "none";
+    nextTextPart3 = 0;
+    nextTextPart2 = 0;
+}
+var yorick = document.createElement("img");
+    yorick.src = "characters/yorick.png";
+    yorick.id = "yorick";
+    yorick.style.display = "none";
+    document.getElementById("page").appendChild(yorick);
+
+var elise = document.createElement("img");
+    elise.src = "characters/elise.png";
+    elise.id = "elise";
+    elise.style.display = "none";
+    document.getElementById("page").appendChild(elise);
+
+function left(){
+    nextTextPart2++
+    nextTextPart1 = 0;
+    nextTextPart3 = 0;
+    document.getElementById("nextButton").onclick=function(){left()};
+    firstOption.style.display = "none";
+    secondOption.style.display = "none";
+    thirdOption.style.display = "none";
+    nextButton.style.display = "inline-block";
+    lucian.style.display = "none";
+    elise.style.display = "none";
+
+    if (nextTextPart2 == 1){
+        story.innerHTML = "You choice to go to the left.";
+    }
+    if (nextTextPart2 == 2){
+        story.innerHTML = "Your walking on a hill and you see something on top of it, it looks like a fench.";
+    }
+    if (nextTextPart2 == 3){
+        story.innerHTML = "When you get there you see that its a graveyard, you get a bad feeling from it but choice to start walking over it..";
+    }
+    if (nextTextPart2 == 4){
+        story.innerHTML = "You hear weird sounds comming from behind you but you keep walking.";
+        document.body.style.backgroundImage = "url(background/graveyard.png)";
+    }
+    if (nextTextPart2 == 5){
+        story.innerHTML = "After a bit of walking you see someone that look like digging.<br>It turns around and sees you to, and smashes with his shovel on the ground.";
+        yorick.style.display = "inline-block";
+    }
+    if (nextTextPart2 == 6){
+        story.innerHTML = "From out of no where you get jumped on by ghouls and have no clue who or what is attacking you and you start running back.";
+        healthFunction(25)
+        document.getElementById("nextButton").onclick=function(){shadowIslesChoices()};
+    }
+}
+
+function middle(){
+    nextTextPart2++
+    nextTextPart1 = 0;
+    nextTextPart3 = 0;
+    document.getElementById("nextButton").onclick=function(){middle()};
+    firstOption.style.display = "none";
+    secondOption.style.display = "none";
+    thirdOption.style.display = "none";
+    nextButton.style.display = "inline-block";
+    lucian.style.display = "none";
+    if (nextTextPart2 == 1){
+        story.innerHTML = "You choice to go straight in the middle";
+    }
+    if (nextTextPart2 == 2){
+        story.innerHTML = "You're walking between trees and there are a lot of spider webs.";
+    }
+    if (nextTextPart2 == 3){
+        story.innerHTML = "After a bit of walking there keeps comming bigger and ticker webs.<br>You hear an evil woman laugh above you but dont see anything";
+    }
+    if (nextTextPart2 == 4){
+        story.innerHTML = "The spider webs block the way and you cant continue on this road the only option is to go back.<br>But when you turn around you see a spider womand.";
+        elise.style.display = "inline-block";
+    }
+    if (nextTextPart2 == 5){
+        story.innerHTML = "The spider woman attacks you and you start running, you got hit but you still can continue running.";
+        healthFunction(25)
+    }
+    if (nextTextPart2 == 6){
+        story.innerHTML = "You lost her and got back where you started";
+        document.getElementById("nextButton").onclick=function(){shadowIslesChoices()};
+    }
+}
+var thresh = document.createElement("img");
+    thresh.src = "characters/thresh.png";
+    thresh.id = "thresh";
+    thresh.style.display = "none";
+    document.getElementById("page").appendChild(thresh);
+var victory = document.createElement("img");
+    victory.src = "characters/victory.png";
+    victory.id = "victory";
+    victory.style.display = "none";
+    document.getElementById("page").appendChild(victory);
+
+function right(){
+    nextTextPart2++
+    nextTextPart1 = 0;
+    nextTextPart3 = 0;
+    document.getElementById("nextButton").onclick=function(){right()};
+    firstOption.style.display = "none";
+    secondOption.style.display = "none";
+    thirdOption.style.display = "none";
+    nextButton.style.display = "inline-block";
+    if (nextTextPart2 == 1){
+        story.innerHTML = "You choice to go right.";
+    }
+    if (nextTextPart2 == 2){
+        story.innerHTML = "After a long way walking lucian starts to blue flames.<br>He reconize them and knows this is the right way.";
+    }
+    if (nextTextPart2 == 3){
+        story.innerHTML = "The more you walk there to more flames there are.";
+    }
+    if (nextTextPart2 == 4){
+        story.innerHTML = "Lucian stops walking... hes whispering... senna..senna..senna.<br>And starts running.";
+    }
+    if (nextTextPart2 == 5){
+        story.innerHTML= "When you follow him you see it.. something is standing there...<br>Lucian starts screenming and starts fighting with it.";
+        lucian.style.display = "none";
+        thresh.style.display = "inline-block";
+    }
+    if (nextTextPart2 == 6){
+        story.innerHTML = "When you are fightin him you noticed something, his lanturn, you see someone in there, could it be Lucian his wife?"
+    }
+    if (nextTextPart2 == 7){
+        story.innerHTML = "You're telling lucian he needs to distrect thresh from you.";
+    }
+    if (nextTextPart2 == 8){
+        story.innerHTML = "You grab the lanturn and try to break it, but you can't";
+    }
+    if (nextTextPart2 == 9){
+        story.innerHTML = name + ": Lucian hit the lanturn with me i can't break it alone.";
+    }
+    if (nextTextPart2 == 10){
+        story.innerHTML = "Lucian hits the lanturn and it break, alot of mist come out..<br>You cant see anything..."
+    }
+    if (nextTextPart2 == 11){
+        story.innerHTML = "Lucian: SENNA!<br>She's laying unconscious and lucian grabs her and screems to run"
+    }
+    if (nextTextPart2 == 12){
+        story.innerHTML= "You all start running and just got away.";
+    }
+    if (nextTextPart2 == 13){
+        thresh.style.display = "none";
+        lucian.style.display = "inline-block";
+        story.innerHTML = "Lucian: thank you so much "+ name +" for helping me get my wife back.<br>Let's go back to Demacia!";
+        victory.style.display = "inline-block";
     }
 }

@@ -198,6 +198,8 @@ input{
     position: absolute;
     top: 25px;
     right: 650px;
+    height: 800px;
+    width: 600px;
 }
 #lucian{
     position: absolute;
@@ -222,4 +224,27 @@ input{
     top: 25px;
     right: 800px;
     height: 650px;
+}
+#yorick{
+    position: absolute;
+    top: 25px;
+    right: 690px;
+    height: 650px;
+}
+#elise{
+    position: absolute;
+    top: 25px;
+    right: 750px;
+    height: 650px;
+}
+#thresh{
+    position: absolute;
+    top: 25px;
+    right: 650px;
+    height: 650px;
+}
+#victory{
+    position: absolute;
+    top: 25px;
+    right: 350px;
 }
