@@ -55,7 +55,7 @@ function invertory(){
 }
 var invertorycounter = 1;
 var fullinvertory = document.createElement("div");
-fullinvertory.id = "fullinvertory";
+fullinvertory.id = "fullinvertory"; 
 
 function invertorySpace(){
     invertorycounter ++;
